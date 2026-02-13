@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+import localFont from "next/font/local";
+export const abcdFont = localFont({
+  src: [
+    {
+      path: "./fonts/ABCDiatypeRoundedVariable-Trial.ttf",
+      weight: "100 900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-diatype",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,11 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${abcdFont.variable} antialiased`}>{children}</body>
     </html>
   );
 }
