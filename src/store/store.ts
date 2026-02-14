@@ -13,7 +13,7 @@ type Actions = {
 
 export const useCupStore = create<State & Actions>()(
   subscribeWithSelector((set) => ({
-    sceneState: "game",
+    sceneState: "intro",
     setSceneState: (value) => set({ sceneState: value }),
   })),
 );
