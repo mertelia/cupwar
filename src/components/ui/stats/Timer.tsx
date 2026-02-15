@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useCupStore } from "@/store/store";
 
 export default function Timer() {
   const initialTime = 30;
@@ -11,8 +12,14 @@ export default function Timer() {
   const strokeWidth = 2.5;
   const circumference = 2 * Math.PI * radius;
 
+  const setSceneState = useCupStore((s) => s.setSceneState);
+  const triggerResetBalls = useCupStore((s) => s.triggerResetBalls);
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (timeLeft <= 0) {
+      triggerResetBalls();
+      setSceneState("afterGame");
+      return;
+    }
     const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft]);

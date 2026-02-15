@@ -69,6 +69,7 @@ export class CupMaterial extends THREE.ShaderMaterial {
         uStrength: { value: 0.5 },
         uShadowColor: { value: new THREE.Color("#ffffff") },
       },
+      side: THREE.DoubleSide,
     });
   }
 }

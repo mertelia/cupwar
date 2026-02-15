@@ -3,7 +3,12 @@ import { Html } from "@react-three/drei";
 
 export default function Logo() {
   return (
-    <Html position={[0, 1.98, 0]} distanceFactor={3.5}>
+    <Html
+      position={[0, 1.98, 0]}
+      distanceFactor={3.5}
+      occlude
+      style={{ pointerEvents: "none", zIndex: 0 }}
+    >
       <div className=" translate-x-[-50%] rotate-8">
         <LogoSvg className="w-30 h-22" />
       </div>
