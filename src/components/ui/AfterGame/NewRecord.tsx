@@ -57,7 +57,7 @@ export default function NewRecord() {
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
         <input
           {...register("nick")}
-          className="w-full rounded-full text-lg md:text-2xl h-12 text-main text-center bg-transparent outline-none font-diatype font-bold ring-main transition-all duration-200 ring-0 focus:ring-2"
+          className="w-full rounded-full text-lg md:text-2xl h-12 text-main text-center bg-transparent outline-none font-diatype font-bold ring-0 focus:ring-0 border-none"
           maxLength={13}
           placeholder="Submit your name here"
         />
