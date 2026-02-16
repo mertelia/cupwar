@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useCupStore } from "@/store/store";
 
 export default function Timer() {
-  const initialTime = 10;
+  const initialTime = 24;
   const [timeLeft, setTimeLeft] = useState(initialTime);
 
   const radius = 9;
