@@ -86,25 +86,31 @@ export default function Intro() {
             <div className="flex flex-col justify-center items-center gap-3 z-10">
               <motion.div
                 variants={child}
-                className="text-main font-diatype font-bold text-2xl text-center tracking-tight"
+                className="text-main font-diatype font-bold text-2xl text-center tracking-tight leading-tight"
               >
-                This mini-game was created using Spline and R3F by{" "}
-                <UnderlineLink
-                  isBubbleText
-                  bubbleText="View"
-                  text="Sed"
-                  href="https://x.com/notdesigner"
-                  className="hover:text-dark transition-colors duration-150"
-                />{" "}
-                and{" "}
-                <UnderlineLink
-                  isBubbleText
-                  bubbleText="View"
-                  text="Mert"
-                  href="https://x.com/notdesigner"
-                  className="hover:text-dark transition-colors duration-150"
-                />
-                <br /> We created it to test our skills
+                <div className="mb-1">
+                  This mini-game was created using Spline and R3F
+                  <span className="inline-block ml-1">
+                    by{" "}
+                    <UnderlineLink
+                      isBubbleText
+                      bubbleText="View"
+                      text="Sed"
+                      href="https://x.com/notdesigner"
+                      className="hover:text-dark transition-colors duration-150"
+                    />{" "}
+                    and{" "}
+                    <UnderlineLink
+                      isBubbleText
+                      bubbleText="View"
+                      text="Mert"
+                      href="https://x.com/notdesigner"
+                      className="hover:text-dark transition-colors duration-150"
+                    />
+                  </span>
+                </div>
+
+                <div className="block">We created it to test our skills</div>
               </motion.div>
 
               <motion.div variants={child}>
