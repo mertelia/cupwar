@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${abcdFont.variable} antialiased `}>{children}</body>
+      <body className={`${abcdFont.variable} antialiased`}>{children}</body>
     </html>
   );
 }
