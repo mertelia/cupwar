@@ -14,7 +14,7 @@ export const abcdFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Cupwar",
+  title: "Cup War",
   description: "A ball game by Sed and Mert.",
 };
 
