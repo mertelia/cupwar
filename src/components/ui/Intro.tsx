@@ -59,7 +59,7 @@ export default function Intro() {
               backgroundSize: "var(--bg-size)",
               backgroundPosition: "top left",
             }}
-            className="fixed inset-0 w-screen h-screen flex flex-col justify-center items-center z-10 select-none px-6 [--bg-size:70px_70px] md:[--bg-size:200px_200px]"
+            className="fixed inset-0 w-screen h-screen flex flex-col justify-center items-center z-10 select-none px-6 [--bg-size:150px_150px] md:[--bg-size:200px_200px]"
           >
             <div
               style={{
