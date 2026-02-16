@@ -32,7 +32,7 @@ export default function BottomText() {
   const sceneState = useCupStore((s) => s.sceneState);
 
   return (
-    <div className="fixed bottom-7 left-1/2 -translate-x-1/2 text-lg text-main  font-diatype z-999 select-none">
+    <div className="fixed bottom-7 left-1/2 -translate-x-1/2 w-full max-w-[90vw] text-center text-sm md:text-lg text-main font-diatype z-999 select-none">
       <AnimatePresence mode="wait">
         {sceneState === "intro" && (
           <motion.div
@@ -51,6 +51,7 @@ export default function BottomText() {
             initial="initial"
             animate="animate"
             exit="exit"
+            className="flex flex-col items-center justify-center"
           >
             <span>You can click the cups to start the game</span>
           </motion.div>
