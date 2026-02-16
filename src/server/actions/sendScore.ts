@@ -4,6 +4,7 @@ import { createSafeActionClient } from "next-safe-action";
 import { ScoreSchema } from "../../../types/score-schema";
 import { db } from "..";
 import { scores } from "../schema";
+import { headers } from "next/headers";
 
 const cooldownMap = new Map<string, number>();
 
@@ -12,7 +13,9 @@ const actionClient = createSafeActionClient();
 export const sendScore = actionClient
   .inputSchema(ScoreSchema)
   .action(async ({ parsedInput: { score, nick } }) => {
-    const headerList = await import("next/headers").then((m) => m.headers());
+    const headerList = await headers();
+    const country = headerList.get("x-vercel-ip-country") || "Unknown";
+
     const ip =
       headerList.get("x-forwarded-for") ??
       headerList.get("x-real-ip") ??
@@ -20,6 +23,7 @@ export const sendScore = actionClient
 
     const now = Date.now();
     const lastSubmit = cooldownMap.get(ip);
+
     if (lastSubmit && now - lastSubmit < 20000) {
       return { error: "You can submit only once every 20 seconds." };
     }
@@ -30,6 +34,7 @@ export const sendScore = actionClient
       await db.insert(scores).values({
         nick,
         score,
+        country,
       });
 
       return {
