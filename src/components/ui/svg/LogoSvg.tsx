@@ -43,11 +43,11 @@ export default function LogoSvg({ className }: { className?: string }) {
       <defs>
         <filter
           id="filter0_ddi_238_21"
-          x="0"
-          y="0"
-          width="542.292"
-          height="390.474"
-          filterUnits="userSpaceOnUse"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+          filterUnits="objectBoundingBox"
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />

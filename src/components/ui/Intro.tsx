@@ -70,7 +70,14 @@ export default function Intro() {
                 pointerEvents: "none",
               }}
             />
-            <motion.div variants={child} className="z-10">
+            <motion.div
+              variants={child}
+              className="z-10 shrink-0 m-0"
+              style={{
+                WebkitTransform: "translate3d(0,0,0)",
+                transform: "translate3d(0,0,0)",
+              }}
+            >
               <LogoSvg className="w-40 h-40 object-contain" />
             </motion.div>
 
