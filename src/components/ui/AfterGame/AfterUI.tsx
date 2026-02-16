@@ -52,7 +52,7 @@ export default function AfterUI({
         className="text-lg md:text-2xl text-main font-diatype font-bold text-center tracking-tight leading-tight"
       >
         {points >= highScore.score - 5 ? (
-          <span>{"You're almost close :)"}</span>
+          <span>{"You’re almost there :)"}</span>
         ) : points === 0 ? (
           <span>I think this game isn't for you.</span>
         ) : (
