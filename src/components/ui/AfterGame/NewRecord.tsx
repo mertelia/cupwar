@@ -46,7 +46,7 @@ export default function NewRecord() {
       animate={{ opacity: 1, filter: "blur(0px)" }}
       exit={{ opacity: 0, filter: "blur(2px)", transition: { duration: 0.2 } }}
       transition={{ duration: 0.2 }}
-      className="flex flex-col justify-center items-center tracking-tight px-4 gap-2"
+      className="flex flex-col justify-center items-center tracking-tight px-4 gap-1"
     >
       <div className="text-xl md:text-2xl text-main font-diatype font-bold text-center">
         You beat the World Record!
@@ -54,12 +54,11 @@ export default function NewRecord() {
       <div className="text-xl md:text-2xl text-main font-diatype font-bold text-center">
         Please save score.
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm mt-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
         <input
           {...register("nick")}
-          className="w-full rounded-full text-lg md:text-2xl h-12 text-main text-center ring-2 ring-main outline-none font-diatype font-bold bg-transparent"
+          className="w-full rounded-full text-lg md:text-2xl h-12 text-main text-center bg-transparent outline-none font-diatype font-bold ring-main transition-all duration-200 ring-0 focus:ring-2"
           maxLength={13}
-          min={3}
           placeholder="Submit your name here"
         />
       </form>

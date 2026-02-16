@@ -44,7 +44,6 @@ export default function Intro() {
             exit={{ opacity: 0, transition: { delay: 1, duration: 1 } }}
           />
           <motion.div
-            className="fixed w-screen h-screen flex flex-col justify-center items-center z-10 select-none"
             variants={container}
             initial="hidden"
             animate="show"
@@ -57,9 +56,10 @@ export default function Intro() {
       #ffffff 270deg
     )`,
               backgroundRepeat: "repeat",
-              backgroundSize: "200px 200px",
+              backgroundSize: "var(--bg-size)",
               backgroundPosition: "top left",
             }}
+            className="fixed inset-0 w-screen h-screen flex flex-col justify-center items-center z-10 select-none px-6 [--bg-size:70px_70px] md:[--bg-size:200px_200px]"
           >
             <div
               style={{
