@@ -72,13 +72,15 @@ export default function Intro() {
             />
             <motion.div
               variants={child}
-              className="z-10 shrink-0 m-0"
+              className="z-10 shrink-0 m-0 relative flex items-center justify-center"
               style={{
                 WebkitTransform: "translate3d(0,0,0)",
                 transform: "translate3d(0,0,0)",
+                width: "160px",
+                height: "160px",
               }}
             >
-              <LogoSvg className="w-40 h-40 object-contain" />
+              <LogoSvg className="w-full h-full object-contain" />
             </motion.div>
 
             <div className="flex flex-col justify-center items-center gap-3 z-10">

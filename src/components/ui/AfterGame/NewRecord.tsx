@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCupStore } from "@/store/store";
 import { useAction } from "next-safe-action/hooks";
 import { sendScore } from "@/server/actions/sendScore";
+import { motion } from "motion/react";
 export default function NewRecord() {
   const points = useCupStore((s) => s.points);
   const setSceneState = useCupStore((s) => s.setSceneState);
@@ -40,7 +41,13 @@ export default function NewRecord() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center tracking-tight px-4 gap-2">
+    <motion.div
+      initial={{ opacity: 0, filter: "blur(2px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      exit={{ opacity: 0, filter: "blur(2px)", transition: { duration: 0.2 } }}
+      transition={{ duration: 0.2 }}
+      className="flex flex-col justify-center items-center tracking-tight px-4 gap-2"
+    >
       <div className="text-xl md:text-2xl text-main font-diatype font-bold text-center">
         You beat the World Record!
       </div>
@@ -56,6 +63,6 @@ export default function NewRecord() {
           placeholder="Submit your name here"
         />
       </form>
-    </div>
+    </motion.div>
   );
 }
