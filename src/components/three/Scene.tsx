@@ -6,11 +6,9 @@ import Lights from "./models/Lights";
 import Floor from "./models/Floor";
 import Background from "./models/Background";
 import Logo from "./models/Logo";
-import Nav from "../ui/Nav";
 import SceneStateHelper from "./helpers/SceneStateHelper";
 import Game from "./models/gameParts/Game";
 import { OrbitControls } from "@react-three/drei";
-import Aftergame from "../ui/AfterGame";
 
 export default function Scene() {
   return (
@@ -26,8 +24,6 @@ export default function Scene() {
         <SceneStateHelper />
         <Game />
       </Canvas>
-      <Nav />
-      <Aftergame />
     </div>
   );
 }

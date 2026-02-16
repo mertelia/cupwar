@@ -9,7 +9,7 @@ export default function Nav() {
   return (
     <div className="fixed top-8 w-[95%] left-1/2 -translate-x-1/2 flex items-center z-999">
       <div className="w-30 h-22 z-50">
-        <LogoSvg className="w-30 h-22 " />
+        {/* <LogoSvg className="w-30 h-22 " /> */}
       </div>
       <AnimatePresence>
         {showStats && (

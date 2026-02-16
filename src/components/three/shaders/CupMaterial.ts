@@ -3,8 +3,6 @@
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
 
-/* ================= SHADERS ================= */
-
 const vertexShader = /* glsl */ `
 varying vec2 vUv;
 varying vec3 vNormal;
@@ -54,8 +52,6 @@ void main() {
   #include <colorspace_fragment>
 }
 `;
-
-/* ================= MATERIAL ================= */
 
 export class CupMaterial extends THREE.ShaderMaterial {
   constructor(map: THREE.Texture | null) {

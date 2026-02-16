@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useCupStore } from "@/store/store";
 
 export default function Timer() {
-  const initialTime = 30;
+  const initialTime = 10;
   const [timeLeft, setTimeLeft] = useState(initialTime);
 
   const radius = 9;
@@ -14,6 +14,7 @@ export default function Timer() {
 
   const setSceneState = useCupStore((s) => s.setSceneState);
   const triggerResetBalls = useCupStore((s) => s.triggerResetBalls);
+
   useEffect(() => {
     if (timeLeft <= 0) {
       triggerResetBalls();
@@ -22,11 +23,20 @@ export default function Timer() {
     }
     const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft, triggerResetBalls, setSceneState]);
+
+  const timerColorClass =
+    timeLeft <= 0
+      ? "text-[#CECECE]"
+      : timeLeft <= 5
+        ? "text-[#FFBB27]"
+        : "text-dark";
 
   return (
     <div className="relative w-16 h-16 flex items-center justify-center">
-      <span className="absolute text-dark/50  font-diatype font-extrabold text-sm pt-0.5">
+      <span
+        className={`absolute font-diatype font-extrabold text-sm pt-0.5 transition-colors duration-300 ${timerColorClass}`}
+      >
         {timeLeft}
       </span>
 
@@ -38,8 +48,9 @@ export default function Timer() {
           stroke="currentColor"
           strokeWidth={strokeWidth}
           fill="transparent"
-          className="text-dark/30"
+          className={`${timerColorClass} opacity-30 transition-colors duration-300`}
         />
+
         <motion.circle
           cx="20"
           cy="20"
@@ -48,11 +59,13 @@ export default function Timer() {
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeLinecap="round"
-          className="text-dark "
+          className={`${timerColorClass} transition-colors duration-300`}
           initial={{ strokeDasharray: circumference, strokeDashoffset: 0 }}
           animate={{
-            strokeDashoffset:
-              -(circumference - (timeLeft / initialTime) * circumference) + 1,
+            strokeDashoffset: -(
+              circumference -
+              (timeLeft / initialTime) * circumference
+            ),
           }}
           transition={{
             duration: 1,

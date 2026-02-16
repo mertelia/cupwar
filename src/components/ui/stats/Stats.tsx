@@ -20,7 +20,7 @@ export default function Stats() {
         </div>
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
-            className="font-diatype text-lg font-bold text-dark/30  leading-none"
+            className="font-diatype text-lg font-bold text-dark leading-none"
             key={points}
             initial={{ y: -15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

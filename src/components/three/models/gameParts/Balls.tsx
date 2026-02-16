@@ -1,10 +1,11 @@
 import { useCupStore } from "@/store/store";
-import { DragControls, useGLTF } from "@react-three/drei";
+import { DragControls, useGLTF, useTexture } from "@react-three/drei";
 import { RigidBody, RapierRigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { animate } from "framer-motion";
+import "../../shaders/StandMaterial";
 
 export default function Balls() {
   const { nodes } = useGLTF("/three/models/stand.glb");
@@ -34,17 +35,17 @@ export default function Balls() {
       if (index === (currentBall + 1) % ballNodes.length)
         return { opacity: 0.4, scale: 0.8 };
       if (index === (currentBall + 2) % ballNodes.length)
-        return { opacity: 0.0, scale: 0.8 };
+        return { opacity: 0.0, scale: 0 };
       if (index === (currentBall + 3) % ballNodes.length)
-        return { opacity: 0.0, scale: 0.8 };
-      return { opacity: 0.0, scale: 0.8 };
+        return { opacity: 0.0, scale: 0 };
+      return { opacity: 0.0, scale: 0 };
     });
   }, [currentBall, ballNodes.length]);
 
   // Matrix for DragControls interaction
   const matrix = useRef(new THREE.Matrix4().makeTranslation(0, 0.93, 2.9));
   const startPosition = new THREE.Vector3(0, 0.93, 2.9);
-  const ballStartPosition = new THREE.Vector3(0.4, 0.93, 2.9);
+  const ballStartPosition = new THREE.Vector3(0.5, 0.93, 2.9);
 
   // Keep an array of simple position objects for animation
   const ballPositions = useRef<{ x: number; y: number; z: number }[]>(
@@ -57,9 +58,9 @@ export default function Balls() {
 
   const targets = [
     { x: 0, y: 0.93, z: 2.9 },
-    { x: 0.1, y: 0.93, z: 2.9 },
-    { x: 0.2, y: 0.93, z: 2.9 },
-    { x: 0.3, y: 0.93, z: 2.9 },
+    { x: 0.14, y: 0.93, z: 2.9 },
+    { x: 0.28, y: 0.93, z: 2.9 },
+    { x: 0.38, y: 0.93, z: 2.9 },
   ];
 
   // Ensure ballPositions stays in sync with ballNodes
@@ -86,7 +87,11 @@ export default function Balls() {
     const duration = 0.7; // Seconds
 
     ballPositions.current.forEach((pos, i) => {
-      animate(pos, targets[i], { duration, type: "spring" });
+      animate(pos, targets[i], {
+        duration,
+        type: "spring",
+        bounceDamping: 0.5,
+      });
     });
 
     setTimeout(() => {
@@ -115,7 +120,7 @@ export default function Balls() {
     );
 
     // restore initial ball nodes and positions
-    const initialNodes = [nodes.Ball1, nodes.Ball2, nodes.Ball3, nodes.Ball4];
+    const initialNodes = [nodes.Ball1, nodes.Ball2, nodes.Ball3];
     setBallNodes(initialNodes as any);
 
     ballPositions.current = initialNodes.map((mesh) => ({
@@ -145,11 +150,11 @@ export default function Balls() {
     requestAnimationFrame(() => {
       const translation = body.translation();
 
-      const randomX = (Math.random() - 0.5) * 0.3;
-      const randomY = Math.random() * 0.3;
-      const randomZ = (Math.random() - 0.5) * 0.3;
+      const randomX = (Math.random() - 0.5) * 0;
+      const randomY = Math.random() * 0;
+      const randomZ = (Math.random() - 0.5) * 0;
 
-      const baseZ = -13;
+      const baseZ = -15;
       const baseY = 2;
 
       const impulse = {
@@ -256,8 +261,8 @@ export default function Balls() {
         <DragControls
           matrix={matrix.current}
           dragLimits={[
-            [-0.4, 0.4],
-            [-1.8, 1.8],
+            [-0.09, 0.09],
+            [0.85, 1.17],
             [2.9, 2.9],
           ]}
           onDrag={(local) => {
@@ -267,39 +272,56 @@ export default function Balls() {
         >
           <mesh scale={0.5}>
             <sphereGeometry args={[0.1, 4, 4]} />
-            <meshBasicMaterial color="blue" wireframe />
+            <meshBasicMaterial color="blue" wireframe visible={false} />
           </mesh>
         </DragControls>
       )}
-      {ballNodes.map((node, i) => {
-        const mesh = node as THREE.Mesh;
-        const meshdata = meshVisual[i];
-        console.log(meshdata);
-
-        return (
-          <RigidBody
-            ccd
-            key={i}
-            type="kinematicPosition"
-            colliders="ball"
-            ref={(el) => {
-              rigidRefs.current[i] = el;
-            }}
-            position={[mesh.position.x, mesh.position.y, mesh.position.z]}
+      {sceneState !== "game" && (
+        <>
+          <mesh
+            geometry={(nodes.Ball1 as THREE.Mesh).geometry}
+            position={nodes.Ball1.position}
           >
-            <mesh
-              geometry={mesh.geometry}
-              scale={sceneState === "game" ? meshdata.scale : 1}
+            {/* @ts-ignore */}
+            <standMaterial />
+          </mesh>
+          <mesh
+            geometry={(nodes.Ball2 as THREE.Mesh).geometry}
+            position={nodes.Ball2.position}
+          >
+            {/* @ts-ignore */}
+            <standMaterial />
+          </mesh>
+        </>
+      )}
+      {sceneState === "game" &&
+        ballNodes.map((node, i) => {
+          const mesh = node as THREE.Mesh;
+          const meshdata = meshVisual[i];
+
+          return (
+            <RigidBody
+              ccd
+              key={i}
+              type="kinematicPosition"
+              colliders="ball"
+              ref={(el) => {
+                rigidRefs.current[i] = el;
+              }}
+              position={[mesh.position.x, mesh.position.y, mesh.position.z]}
             >
-              <meshBasicMaterial
-                color={"white"}
-                transparent
-                opacity={sceneState === "game" ? meshdata.opacity : 1}
-              />
-            </mesh>
-          </RigidBody>
-        );
-      })}
+              <mesh geometry={mesh.geometry} scale={meshdata.scale}>
+                {/* @ts-ignore */}
+                <standMaterial
+                  key={"mat-" + i}
+                  uOpacity={meshdata.opacity}
+                  transparent
+                  depthWrite={false}
+                />
+              </mesh>
+            </RigidBody>
+          );
+        })}
     </>
   );
 }

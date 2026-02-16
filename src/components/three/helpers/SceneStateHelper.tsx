@@ -4,8 +4,14 @@ import { useEffect } from "react";
 export default function SceneStateHelper() {
   const sceneState = useCupStore((s) => s.sceneState);
   const setSceneState = useCupStore((s) => s.setSceneState);
+
   useEffect(() => {
     const handleStart = (e: KeyboardEvent | MouseEvent) => {
+      if (e instanceof MouseEvent) {
+        const target = e.target as HTMLElement;
+        if (target.closest("a")) return;
+      }
+
       if (
         (e instanceof KeyboardEvent && e.key === "Enter") ||
         (e instanceof MouseEvent && e.button === 0)
@@ -23,6 +29,7 @@ export default function SceneStateHelper() {
       window.removeEventListener("keydown", handleStart);
       window.removeEventListener("mousedown", handleStart);
     };
-  }, [sceneState]);
+  }, [sceneState, setSceneState]);
+
   return null;
 }

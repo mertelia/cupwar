@@ -8,7 +8,7 @@ export default function Lights() {
 
   return (
     <>
-      {/* <ambientLight intensity={3} /> */}
+      <ambientLight intensity={3} />
       {/* <rectAreaLight position={[0, 0, -2]} intensity={2} lookAt={[0, 2, 0]} /> */}
     </>
   );

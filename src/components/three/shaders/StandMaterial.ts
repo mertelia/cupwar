@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
+import { shaderMaterial } from "@react-three/drei";
 
 const vertexShader = `
   varying vec3 vNormal;
@@ -16,67 +17,68 @@ const vertexShader = `
 `;
 
 const fragmentShader = `
-  uniform vec3 lightDirection;
+ uniform vec3 lightDirection;
 
-  uniform float verticalStart;
-  uniform float verticalEnd;
-  uniform float verticalPower;
+uniform float verticalStart;
+uniform float verticalEnd;
+uniform float verticalPower;
 
-  uniform float radialEnd;
-  uniform float radialStrength;
+uniform float radialEnd;
+uniform float radialStrength;
 
-  uniform float baseDarkness;
-  uniform float grayTone;
+uniform float baseDarkness;
+uniform float grayTone;
 
-  uniform vec3 edgeColor;
+uniform vec3 edgeColor;
 
-  varying vec3 vNormal;
-  varying vec3 vPosition;
+uniform float uOpacity;  
 
-  void main() {
+varying vec3 vNormal;
+varying vec3 vPosition;
 
-    float diff = max(dot(normalize(vNormal), normalize(lightDirection)), 0.0);
+void main() {
 
-    vec3 litColor = vec3(1.0);
-    vec3 baseColor = mix(edgeColor, litColor, diff);
+  float diff = max(dot(normalize(vNormal), normalize(lightDirection)), 0.0);
 
-    float vertical = smoothstep(verticalStart, verticalEnd, vPosition.y);
-    vertical = pow(vertical, verticalPower);
+  vec3 litColor = vec3(1.0);
+  vec3 baseColor = mix(edgeColor, litColor, diff);
 
-    float radial = length(vPosition.xz);
-    radial = smoothstep(0.0, radialEnd, radial);
+  float vertical = smoothstep(verticalStart, verticalEnd, vPosition.y);
+  vertical = pow(vertical, verticalPower);
 
-    float shade = (1.0 - vertical) * radial * radialStrength;
-    shade = max(shade, baseDarkness * (1.0 - vertical));
+  float radial = length(vPosition.xz);
+  radial = smoothstep(0.0, radialEnd, radial);
 
-    vec3 gray = vec3(grayTone);
+  float shade = (1.0 - vertical) * radial * radialStrength;
+  shade = max(shade, baseDarkness * (1.0 - vertical));
 
-    vec3 finalColor = mix(baseColor, gray, shade);
+  vec3 gray = vec3(grayTone);
 
-    gl_FragColor = vec4(finalColor, 1.0);
-  }
+  vec3 finalColor = mix(baseColor, gray, shade);
+
+  gl_FragColor = vec4(finalColor, uOpacity); 
+}
+
 `;
 
-class StandMaterial extends THREE.ShaderMaterial {
-  constructor() {
-    super({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        lightDirection: {
-          value: new THREE.Vector3(0.0, 0.1, 1.3).normalize(),
-        },
-        verticalStart: { value: -1.0 },
-        verticalEnd: { value: -0.7 },
-        verticalPower: { value: 6.25 },
-        radialEnd: { value: 1.25 },
-        radialStrength: { value: 1.05 },
-        baseDarkness: { value: 0.36 },
-        grayTone: { value: 0.96 },
-        edgeColor: { value: new THREE.Color("#ebebeb") },
-      },
-    });
-  }
-}
+const StandMaterial = shaderMaterial(
+  {
+    lightDirection: new THREE.Vector3(0.0, 0.1, 1.3).normalize(),
+    verticalStart: -1.0,
+    verticalEnd: -0.7,
+    verticalPower: 6.25,
+    radialEnd: 1.25,
+    radialStrength: 1.05,
+    baseDarkness: 0.36,
+    grayTone: 0.96,
+    edgeColor: new THREE.Color("#ebebeb"),
+    uOpacity: 1.0,
+  },
+  vertexShader,
+  fragmentShader,
+);
+StandMaterial.prototype.transparent = true;
+StandMaterial.prototype.depthWrite = false;
+StandMaterial.prototype.blending = THREE.NormalBlending;
 
 extend({ StandMaterial });

@@ -2,6 +2,7 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import LogoSvg from "./svg/LogoSvg";
 import { useCupStore } from "@/store/store";
+import UnderlineLink from "./UnderlineLink";
 
 const container = {
   hidden: {},
@@ -43,7 +44,7 @@ export default function Intro() {
             exit={{ opacity: 0, transition: { delay: 1, duration: 1 } }}
           />
           <motion.div
-            className="fixed w-screen h-screen flex flex-col justify-center items-center z-10"
+            className="fixed w-screen h-screen flex flex-col justify-center items-center z-10 select-none"
             variants={container}
             initial="hidden"
             animate="show"
@@ -78,7 +79,22 @@ export default function Intro() {
                 variants={child}
                 className="text-main font-diatype font-bold text-2xl text-center tracking-tight"
               >
-                This mini-game was created using Spline and R3F by Sed and Mert
+                This mini-game was created using Spline and R3F by{" "}
+                <UnderlineLink
+                  isBubbleText
+                  bubbleText="View"
+                  text="Sed"
+                  href="https://x.com/notdesigner"
+                  className="hover:text-dark transition-colors duration-150"
+                />{" "}
+                and{" "}
+                <UnderlineLink
+                  isBubbleText
+                  bubbleText="View"
+                  text="Mert"
+                  href="https://x.com/notdesigner"
+                  className="hover:text-dark transition-colors duration-150"
+                />
                 <br /> We created it to test our skills
               </motion.div>
 
@@ -93,7 +109,7 @@ export default function Intro() {
                   }}
                   className="text-main/60 text-[18px] font-bold font-diatype pb-16"
                 >
-                  Press Enter or Click to start the game
+                  Click anywhere to proceed.
                 </motion.div>
               </motion.div>
             </div>
