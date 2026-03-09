@@ -1,11 +1,11 @@
 # CupWar
 
-3D mini-game built with Three.js and JavaScript for training purposes, inspired by a stylized visual style.
+3D mini-game built with Three.js and JavaScript for training purposes, inspired by a stylized visual style.<br />
 ![CupWar Gameplay](./public/cup1.png)
 
 ## About the Project
 
-A hands-on project of React Three Fiber and Three.js within a Next.js environment. 
+A hands-on project of React Three Fiber and Three.js within a Next.js environment. <br />
 This project features stylized 3D aesthetics, physics-driven interactions with Rapier, and a persistent high-score system powered by Supabase and Drizzle.
 
 ## Demo
