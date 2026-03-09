@@ -26,6 +26,7 @@ Play the game online:
 - React Hook Form 
 - Zod
 - next-safe-action
+- Zustand
 
 
 ## Installation & Development
