@@ -1,7 +1,7 @@
 # CupWar
 
 3D mini-game built with Three.js and JavaScript for training purposes, inspired by a stylized visual style.
-![CupWar Gameplay](./public/cupwar1.png)
+![CupWar Gameplay](public/cupwar1.png)
 
 ## About the Project
 
@@ -31,12 +31,16 @@ Play the game online:
 ## Installation & Development
 
 1. Clone the repository and install dependencies
-git clone https://github.com/mertelia/cupwar.git && cd cupwar
-
+```bash
+git clone https://github.com/mertelia/cupwar.git 
+cd cupwar
 npm install
-
+```
 3. Database Setup: Create a .env file and add your Supabase/Postgres URL
+```bash
 echo "DATABASE_URL=your_database_url_here" > .env
-
-4. Sync database schema & start development
+```
+5. Sync database schema & start development
+```bash
 npx drizzle-kit push && npm run dev
+```
