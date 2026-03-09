@@ -5,8 +5,8 @@
 
 ## About the Project
 
-A hands-on project of React Three Fiber and Three.js within a Next.js environment. <br />
-This project features stylized 3D aesthetics, physics-driven interactions with Rapier, and a persistent high-score system powered by Supabase and Drizzle.
+A hands-on project using React Three Fiber and Three.js in Next.js. <br />
+It includes stylized 3D visuals, Rapier physics, and a persistent high-score system using Supabase and Drizzle.
 
 ## Demo
 Play the game online:  
