@@ -10,7 +10,7 @@ This project features stylized 3D aesthetics, physics-driven interactions with R
 
 ## Demo
 Play the game online:  
-[[https://cupwar.vercel.app](https://cupwar.vercel.app)  ]
+[https://cupwar.vercel.app](https://cupwar.vercel.app)  
 
 ## Tech Stack
 
