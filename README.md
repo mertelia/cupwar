@@ -1,7 +1,7 @@
 # CupWar
 
 3D mini-game built with Three.js and JavaScript for training purposes, inspired by a stylized visual style.
-![CupWar Gameplay](public/cupwar1.png)
+![CupWar Gameplay](./public/cup1.png)
 
 ## About the Project
 
